@@ -1,3 +1,4 @@
+-- mhgms
 CREATE TRIGGER trigger
 AFTER UPDATE ON users
 FOR EACH ROW
