@@ -1,5 +1,5 @@
 -- create trigger increase item when make order
-CREATE TRIGGER increase
+CREATE TRIGGER decrease
 AFTER INSERT ON orders
 FOR EACH ROW UPDATE items
     SET quantity = quantity - NEW.number
