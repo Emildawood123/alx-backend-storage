@@ -1,2 +1,2 @@
-insert inside collection \school\ doc
+// insert inside collection \school\ doc
 db.school.insert({name: "Holberton school"})
