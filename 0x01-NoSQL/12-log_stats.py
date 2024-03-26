@@ -4,6 +4,7 @@ from pymongo import MongoClient
 
 
 def methods_count():
+    """count method"""
     mon = MongoClient("mongodb://127.0.0.1:27017")
     collection = mon.logs.nginx
     All = collection.count_documents({})
