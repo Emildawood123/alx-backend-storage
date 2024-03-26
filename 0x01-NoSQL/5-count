@@ -1,0 +1,2 @@
+// count function with collection in mongo
+db.school.count()
