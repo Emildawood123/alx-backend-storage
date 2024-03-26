@@ -26,5 +26,7 @@ def methods_count():
     print("IPs:")
     for ip in ips:
         print('\t{}: {}'.format(ip.get('_id'), ip.get("count")))
+
+
 if __name__ == "__main__":
     methods_count()
