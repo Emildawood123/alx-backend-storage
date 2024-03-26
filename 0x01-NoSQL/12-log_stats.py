@@ -3,7 +3,7 @@
 from pymongo import MongoClient
 
 
-def count_methods():
+def methods_count():
     mon = MongoClient("mongodb://127.0.0.1:27017")
     collection = mon.logs.nginx
     All = collection.count_documents({})
@@ -15,5 +15,7 @@ def count_methods():
         print("\tmethod {}: {}".format(method, count))
     status = collection.count_documents({"method": "GET", "path": "/status"})
     print("{} status check".format(status))
-    if __name__ == "main":
-        count_methods()
+
+
+if __name__ == "__main__":
+    methods_count()
