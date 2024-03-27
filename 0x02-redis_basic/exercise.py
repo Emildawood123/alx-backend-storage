@@ -13,6 +13,6 @@ class Cache:
 
     def store(self, data: str | bytes | int | float) -> str:
         """store method"""
-        keygen = uuid.uuid4()
-        self._redis.set('key', data)
+        keygen: str = uuid.uuid4()
+        self._redis.set(key, data)
         return keygen
