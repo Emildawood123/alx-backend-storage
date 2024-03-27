@@ -22,6 +22,17 @@ def call_history(method: callable) -> callable:
         return str(method(self, *args, **kwargs))
     return other_nested
 
+
+def replay(method: Callable) -> None:
+    key = method.__qualname__
+    cache = redis.Redis()
+    decode_calls = cache.get(name).decode("utf-8")
+    print(f"{key} was called {decode_calls} times:")
+    inputs = cache.lrange(key + ":inputs", 0, -1)
+    outputs = cache.lrange(key + ":outputs", 0, -1)
+    for inpu, outpu in zip(inputs, outputs):
+        print("{}(*{}) -> {}".format(key, inpu.decode("utf-8"),
+                                     outpu.decode("utf-8")))
 class Cache:
     """cache class"""
     def __init__(self):
