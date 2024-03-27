@@ -11,6 +11,8 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @count_calls
+    @call_history
     def store(self, data: str | bytes | int | float) -> str:
         """store method"""
         keygen: str = uuid.uuid4()
