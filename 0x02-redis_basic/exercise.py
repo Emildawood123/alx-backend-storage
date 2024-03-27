@@ -16,13 +16,3 @@ class Cache:
         keygen: str = str(uuid.uuid4())
         self._redis.set(keygen, data)
         return keygen
-
-if __name__ == "__main__":
-    cache = Cache()
-
-    data = b"hello"
-    key = cache.store(data)
-    print(key)
-
-    local_redis = redis.Redis()
-    print(local_redis.get(key))
