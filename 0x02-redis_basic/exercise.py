@@ -13,6 +13,15 @@ def count_calls(method: callable) -> callable:
         return method(self, *args, **kwargs)
     return nested
 
+def call_history(method: callable) -> callable:
+    @wraps(method)
+    def other_nested(self, *args, **kwargs):
+        keygen = method.__qualname__
+        self._redis.lpush("{}:outputs", str(method(self, *args, **kwargs)))
+        self._redis.lpush("{}:inputs", str(args))
+        return str(method(self, *args, **kwargs))
+    return other_nested
+
 class Cache:
     """cache class"""
     def __init__(self):
