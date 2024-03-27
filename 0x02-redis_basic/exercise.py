@@ -1,8 +1,17 @@
 #!/usr/bin/env python3
 """ first use redis with python """
+from functools import wraps
 import redis
 import uuid
 
+
+def count_calls(method: callable) -> callable:
+    @wraps(method)
+    def nested(slef, *args, **kwargs):
+        keygen = method.__qualname__
+        self._redis.incr(keygen)
+        return method(self, *args, **kwargs)
+    return nested
 
 class Cache:
     """cache class"""
