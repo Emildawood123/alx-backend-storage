@@ -17,8 +17,8 @@ def call_history(method: callable) -> callable:
     @wraps(method)
     def other_nested(self, *args, **kwargs):
         keygen = method.__qualname__
-        self._redis.lpush("{}:outputs".format(keygen), str(method(self, *args, **kwargs)))
         self._redis.lpush("{}:inputs".format(keygen), str(args))
+        self._redis.lpush("{}:outputs".format(keygen), str(method(self, *args, **kwargs)))
         return str(method(self, *args, **kwargs))
     return other_nested
 
