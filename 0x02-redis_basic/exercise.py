@@ -26,7 +26,7 @@ def call_history(method: callable) -> callable:
 def replay(method: Callable) -> None:
     key = method.__qualname__
     cache = redis.Redis()
-    decode_calls = cache.get(name).decode("utf-8")
+    decode_calls = cache.get(key).decode("utf-8")
     print(f"{key} was called {decode_calls} times:")
     inputs = cache.lrange(key + ":inputs", 0, -1)
     outputs = cache.lrange(key + ":outputs", 0, -1)
