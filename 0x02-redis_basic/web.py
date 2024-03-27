@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Advanced task"""
+"""get_page method"""
 import requests
 import redis
 from functools import wraps
@@ -7,10 +7,10 @@ from typing import Callable
 
 
 def helper_method(fn: Callable) -> Callable:
-    """helper Method"""
+    """helper_method"""
     @wraps(fn)
     def wrapper(url: str) -> str:
-        """wrapper"""
+        """wrapper function"""
         r = redis.Redis()
         r.incr(f"count:{url}")
         cached_page = r.get(f"{url}")
@@ -25,5 +25,5 @@ def helper_method(fn: Callable) -> Callable:
 
 @helper_method
 def get_page(url: str) -> str:
-    """get page method"""
+    """get_page method"""
     response = requests.get(url)
