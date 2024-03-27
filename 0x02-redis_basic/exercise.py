@@ -2,6 +2,8 @@
 """ first use redis with python """
 import redis
 import uuid
+
+
 class Cache:
     """cache class"""
     def __init__(self):
